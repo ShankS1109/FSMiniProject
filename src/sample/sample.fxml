@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -11,6 +10,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <ImageView fitHeight="480.0" fitWidth="686.0" layoutY="26.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -32,7 +32,24 @@
                 <GaussianBlur radius="4.0" />
             </effect>
         </ImageView>
-        <AnchorPane layoutY="422.0" prefHeight="84.0" prefWidth="686.0" style="-fx-background-color: white;" />
+        <AnchorPane layoutY="429.0" prefHeight="77.0" prefWidth="686.0" style="-fx-background-color: white;">
+            <children>
+                <Button fx:id="next" layoutX="450.0" layoutY="15.0" mnemonicParsing="false" onAction="#nextpage" disable="true" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #27df8f;" text="Next" textFill="#f0f0f0">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button fx:id="prev" disable="true" layoutX="567.0" layoutY="15.0" mnemonicParsing="false" onAction="#prevpage" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #27df8f;" text="Prev" textFill="#f0f0f0">
+                    <effect>
+                        <DropShadow blurType="GAUSSIAN" />
+                    </effect>
+                </Button>
+                <RadioButton fx:id="terms" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="337.0" text="I Have Read the Terms and Conditions" onAction="#nextcontrol">
+                    <font>
+                        <Font name="Arial Bold Italic" size="12.0" />
+                    </font>
+                </RadioButton>
+            </children></AnchorPane>
         <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
@@ -56,18 +73,15 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane layoutY="458.0" prefHeight="47.0" prefWidth="686.0" style="-fx-background-color: 22f7a5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-        <Button fx:id="next" layoutX="458.0" layoutY="445.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Next" textFill="#f0f0f0" />
-        <Button fx:id="cancel" layoutX="569.0" layoutY="445.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" style="-fx-background-color: #27df8f;" text="Cancel" textFill="#f0f0f0" />
         <Label layoutX="7.0" layoutY="26.0" prefHeight="72.0" prefWidth="250.0" text="Welcome To Travelexomy" textAlignment="JUSTIFY" textFill="#fdfdfd">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
         <Label layoutX="77.0" layoutY="74.0" text="One Stop destination for memories" textFill="#f8f8f8" />
-        <StackPane fx:id="stackid" layoutX="-4.0" layoutY="27.0" prefHeight="479.0" prefWidth="686.0">
+        <StackPane fx:id="stackid" layoutX="-4.0" layoutY="27.0" prefHeight="406.0" prefWidth="686.0">
             <children>
-                <AnchorPane fx:id="page1" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane fx:id="page1" minHeight="-Infinity" prefHeight="386.0" prefWidth="686.0">
                     <children>
                         <GridPane layoutX="21.0" layoutY="58.0" prefHeight="338.0" prefWidth="372.0">
                             <columnConstraints>
@@ -119,15 +133,15 @@
                                         <Font name="Arial Bold" size="16.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="T_id" prefWidth="0.0" promptText="0000 - 10000" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
-                                <TextField fx:id="name" promptText="Enter Full Name" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="T_id" prefWidth="0.0" promptText="0000 - 9999" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
+                                <TextField fx:id="name" promptText="Enter Full Name" onAction="#namesync" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="persons" promptText="Enter no. of Persons" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                 <TextField fx:id="days" promptText="Enter no. of Days" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                <DatePicker fx:id="date" prefHeight="26.0" prefWidth="273.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <ChoiceBox fx:id="location" prefHeight="26.0" prefWidth="252.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <DatePicker fx:id="date" promptText="select date from calendar" prefHeight="26.0" prefWidth="273.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <ChoiceBox fx:id="Location" onAction="#getLocation" prefHeight="26.0" prefWidth="252.0" style="-fx-background-radius: 10 ;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <children>
-                                        <RadioButton fx:id="economy" mnemonicParsing="false" prefHeight="22.0" prefWidth="102.0" text="Economy" textFill="WHITE">
+                                        <RadioButton fx:id="economy" mnemonicParsing="false" onAction="#TextChange" prefHeight="22.0" prefWidth="102.0" text="Economy" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
@@ -135,12 +149,12 @@
                                                 <ToggleGroup fx:id="pack" />
                                             </toggleGroup>
                                         </RadioButton>
-                                        <RadioButton fx:id="gold" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Gold" textFill="WHITE" toggleGroup="$pack">
+                                        <RadioButton fx:id="gold" mnemonicParsing="false" onAction="#TextChange" prefHeight="30.0" prefWidth="66.0" text="Gold" textFill="WHITE" toggleGroup="$pack">
                                             <font>
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
                                         </RadioButton>
-                                        <RadioButton fx:id="platinum" mnemonicParsing="false" text="Platinum" textFill="WHITE" toggleGroup="$pack">
+                                        <RadioButton fx:id="platinum" mnemonicParsing="false" onAction="#TextChange" text="Platinum" textFill="WHITE" toggleGroup="$pack">
                                             <font>
                                                 <Font name="Arial Bold" size="14.0" />
                                             </font>
@@ -149,12 +163,7 @@
                                 </VBox>
                             </children>
                         </GridPane>
-                        <RadioButton fx:id="terms" layoutX="21.0" layoutY="431.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="314.0" text="I Have Read the Terms and Conditions">
-                            <font>
-                                <Font name="Arial Bold Italic" size="12.0" />
-                            </font>
-                        </RadioButton>
-                        <TextArea fx:id="packagedeal" layoutX="428.0" layoutY="113.0" opacity="0.6" prefHeight="268.0" prefWidth="250.0" style="-fx-border-radius: 10;" text="        COST :Rs. 10000&#10;            per person&#10;&#10;Includes:-&#10;Flight tickets, &#10;Airport transfers, &#10;Accomodation at 3 star hotel&#10;double sharing, &#10;Attractions,&#10;Buffet breakfast &amp; Dinner,&#10;Tour bus to and from the sights">
+                        <TextArea fx:id="packagedeal" editable="false" layoutX="428.0" layoutY="113.0" opacity="0.6" prefHeight="268.0" prefWidth="250.0" style="-fx-border-radius: 10;" text="        COST :Rs. 80000&#10;            per person&#10;&#10;Includes:-&#10;Flight tickets, &#10;Airport transfers, &#10;Accommodation at 3 star hotel,&#10;$ Days &amp; 5 Nights,&#10;double sharing, &#10;Attractions,&#10;Buffet breakfast &amp; Dinner,&#10;Tour bus to and from the sights">
                             <font>
                                 <Font name="Arial Bold" size="15.0" />
                             </font>
@@ -212,12 +221,12 @@
                                         <Font name="Arial Bold" size="17.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="booking" opacity="0.75" promptText="Booking Under" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
+                                <TextField fx:id="booking" opacity="0.75" promptText="Booking Under" editable="false" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
                                 <TextField fx:id="phonenum" opacity="0.75" promptText="Enter Phone Number" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="email" opacity="0.75" promptText="Enter email Id" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <TextField fx:id="adults" opacity="0.75" promptText="Enter no. of adults" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <TextField fx:id="children" opacity="0.75" promptText="Enter no. of children" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <TextArea fx:id="total_amt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="29.0" prefWidth="186.0" promptText="total amount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <TextArea fx:id="total_amt" maxHeight="-Infinity" editable="false" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="29.0" prefWidth="186.0" promptText="total amount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                             </children>
                         </GridPane>
                     </children>
@@ -229,10 +238,13 @@
                                 <Font name="Arial Bold" size="18.0" />
                             </font>
                         </TextArea>
-                        <Button fx:id="finish" layoutX="301.0" layoutY="220.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Finish" textFill="WHITE">
+                        <Button fx:id="finish" layoutX="301.0" onAction="#save" layoutY="220.0" mnemonicParsing="false" disable="true" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Finish" textFill="WHITE">
                             <font>
                                 <Font name="Arial Bold" size="16.0" />
                             </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
                         </Button>
                     </children>
                 </AnchorPane>
