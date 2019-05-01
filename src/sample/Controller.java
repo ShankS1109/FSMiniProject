@@ -35,6 +35,7 @@ public class  Controller implements Initializable{
         @FXML
         void nextpage(ActionEvent event){
             System.out.println("next button clicked!");
+            System.out.println(date.getValue());
             namesync();
             if(count==0){
                 page1.setVisible(false);
@@ -241,7 +242,12 @@ public class  Controller implements Initializable{
             phno = phonenum.getText();
             //loc has location, packagee has package
             DaysBooking = Integer.parseInt(days.getText());
-            //total =
+            int p = Integer.parseInt(persons.getText());
+            int c = Integer.parseInt(children.getText());
+            total = DaysBooking*(p*cost_factor[0]*LocCost[index]+c*cost_factor[1]*LocCost[index]);
+            String DateSel = String.valueOf(date.getValue());
+            String record = name1+"|"+eadd+"|"+phno+"|"+loc+"|"+packagee+"|"+DaysBooking+"|"+total+"|"+DateSel;
+            //id is the index
 
 
         }
