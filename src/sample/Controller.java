@@ -1,10 +1,8 @@
 package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
         import javafx.scene.control.ChoiceBox;
@@ -14,7 +12,7 @@ import javafx.scene.control.Button;
         import javafx.scene.control.TextField;
         import javafx.scene.control.ToggleGroup;
         import javafx.scene.layout.AnchorPane;
-        import javafx.scene.layout.StackPane;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +25,7 @@ public class  Controller implements Initializable{
     private int DaysBooking=4;//4 days 3 nights
     private float[] cost_factor={1.0f ,0.5f};
     private float total=0.0f;
+    int p=0,c=0;
     private int[] LocCost={100000,175000,250000};
     ObservableList<String> locationList = FXCollections.observableArrayList("Amsterdam","Bali","Cyprus","Egypt","Japan","London",
             "Paris","Singapore","Thailand");
@@ -37,6 +36,7 @@ public class  Controller implements Initializable{
             System.out.println("next button clicked!");
             System.out.println(date.getValue());
             namesync();
+
             if(count==0){
                 page1.setVisible(false);
                 page2.setVisible(true);
@@ -50,6 +50,10 @@ public class  Controller implements Initializable{
                 page3.setVisible(true);
                 count++;
                 prev.setDisable(false);
+            }
+            else if(count==3){
+                prev.setDisable(true);
+                next.setDisable(true);
             }
 
         }
@@ -203,11 +207,20 @@ public class  Controller implements Initializable{
         private AnchorPane page2;
 
         @FXML
-        private TextField booking;
+        private Button calculate;
         @FXML
-        void getbooking(){
-            booking.setText(name.getText());
+        void calculation(){
+            System.out.println("Calculation is being done!!");
+            DaysBooking = Integer.parseInt(days.getText());
+            p = Integer.parseInt(adults.getText());
+            c = Integer.parseInt(children.getText());
+            total = DaysBooking*(p*cost_factor[0]*LocCost[index]+c*cost_factor[1]*LocCost[index]);
+            total_amt.setText(String.valueOf(total));
+            System.out.println(total);
         }
+
+        @FXML
+        private TextField booking;
 
         @FXML
         private TextField phonenum;
@@ -235,21 +248,52 @@ public class  Controller implements Initializable{
 
         @FXML
         void save(){
+            System.out.println("finish button pressed!!");
+            finish.setVisible(false);
             String code = T_id.getText();
             id = Integer.parseInt(code);
             name1 = name.getText();
             eadd = email.getText();
             phno = phonenum.getText();
-            //loc has location, packagee has package
-            DaysBooking = Integer.parseInt(days.getText());
-            int p = Integer.parseInt(persons.getText());
-            int c = Integer.parseInt(children.getText());
-            total = DaysBooking*(p*cost_factor[0]*LocCost[index]+c*cost_factor[1]*LocCost[index]);
+            p = Integer.parseInt(adults.getText());
+            total = Float.parseFloat(total_amt.getText());
             String DateSel = String.valueOf(date.getValue());
-            String record = name1+"|"+eadd+"|"+phno+"|"+loc+"|"+packagee+"|"+DaysBooking+"|"+total+"|"+DateSel;
+            String record = id+"|"+name1+"|"+eadd+"|"+phno+"|"+loc+"|"+packagee+"|"+DaysBooking+"|"+p+"|"+String.valueOf(total)+"|"+DateSel;
+            System.out.println(record);
+            String display;
+            display = "      Booking Details:-\n" +
+                    "\n" +"Booking ID : "+id+"\n"+
+                    "Name :"+name1+"\n" +
+                    "Email :"+eadd+"\n" +
+                    "Phone Number:"+phno+"\n" +
+                    "Location :"+loc+"\n" +
+                    "Package:"+packagee+"\n"+
+                    "Booking Date:"+DateSel+"\n" +
+                    "Duration :"+DaysBooking+" Days & "+String.valueOf(DaysBooking+1)+" Nights"+"\n" +
+                    "Total Amount : Rs."+String.valueOf(total)+"\n";
+            Main m = new Main();
+            int dataBlock= m.searchIndex(id);
+            m.storeRecord(dataBlock, id, record);
             //id is the index
+            textarea2.setVisible(true);
+            again.setDisable(false);
+            again.setVisible(true);
+            textarea2.setText(display);
+        }
+        @FXML
+        private Button again;
 
-
+        @FXML
+        void again_action(){
+            textarea2.setVisible(false);
+            again.setDisable(true);
+            again.setVisible(false);
+            finish.setVisible(true);
+            page3.setVisible(false);
+            page1.setVisible(true);
+            clean();
+            textarea2.clear();
+            terms.setSelected(false);
         }
 
         @Override@FXML
@@ -258,5 +302,17 @@ public class  Controller implements Initializable{
         economy.setSelected(true);
     }
     public Controller(){}
-
+    public void clean(){
+      T_id.clear();
+      name.clear();
+      persons.clear();
+      days.clear();
+      booking.clear();
+      phonenum.clear();
+      adults.clear();
+      children.clear();
+      total_amt.clear();
+      email.clear();
+      textarea2.clear();
+    }
 }

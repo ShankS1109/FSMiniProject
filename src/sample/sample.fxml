@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <ImageView fitHeight="480.0" fitWidth="686.0" layoutY="26.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -34,7 +35,7 @@
         </ImageView>
         <AnchorPane layoutY="429.0" prefHeight="77.0" prefWidth="686.0" style="-fx-background-color: white;">
             <children>
-                <Button fx:id="next" layoutX="450.0" layoutY="15.0" mnemonicParsing="false" onAction="#nextpage" disable="true" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #27df8f;" text="Next" textFill="#f0f0f0">
+                <Button fx:id="next" disable="true" layoutX="450.0" layoutY="15.0" mnemonicParsing="false" onAction="#nextpage" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #27df8f;" text="Next" textFill="#f0f0f0">
                     <effect>
                         <DropShadow />
                     </effect>
@@ -44,7 +45,7 @@
                         <DropShadow blurType="GAUSSIAN" />
                     </effect>
                 </Button>
-                <RadioButton fx:id="terms" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="337.0" text="I Have Read the Terms and Conditions" onAction="#nextcontrol">
+                <RadioButton fx:id="terms" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#nextcontrol" prefHeight="26.0" prefWidth="337.0" text="I Have Read the Terms and Conditions">
                     <font>
                         <Font name="Arial Bold Italic" size="12.0" />
                     </font>
@@ -134,10 +135,10 @@
                                     </font>
                                 </Label>
                                 <TextField fx:id="T_id" prefWidth="0.0" promptText="0000 - 9999" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
-                                <TextField fx:id="name" promptText="Enter Full Name" onAction="#namesync" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="name" onAction="#namesync" promptText="Enter Full Name" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="persons" promptText="Enter no. of Persons" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                 <TextField fx:id="days" promptText="Enter no. of Days" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                <DatePicker fx:id="date" promptText="select date from calendar" prefHeight="26.0" prefWidth="273.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <DatePicker fx:id="date" prefHeight="26.0" prefWidth="273.0" promptText="select date from calendar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <ChoiceBox fx:id="Location" onAction="#getLocation" prefHeight="26.0" prefWidth="252.0" style="-fx-background-radius: 10 ;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <children>
@@ -172,6 +173,11 @@
                 </AnchorPane>
                 <AnchorPane fx:id="page2" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
+                        <Label fx:id="calc" layoutX="554.0" layoutY="361.0" prefHeight="31.0" prefWidth="109.0" text="Calculate..." textFill="#00ab06" underline="true">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
                         <Label layoutX="272.0" layoutY="69.0" text="Personal Details:-" textFill="#fffcfc">
                             <font>
                                 <Font name="System Bold Italic" size="17.0" />
@@ -221,24 +227,25 @@
                                         <Font name="Arial Bold" size="17.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="booking" opacity="0.75" promptText="Booking Under" editable="false" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
+                                <TextField fx:id="booking" editable="false" opacity="0.75" promptText="Booking Under" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
                                 <TextField fx:id="phonenum" opacity="0.75" promptText="Enter Phone Number" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextField fx:id="email" opacity="0.75" promptText="Enter email Id" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <TextField fx:id="adults" opacity="0.75" promptText="Enter no. of adults" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <TextField fx:id="children" opacity="0.75" promptText="Enter no. of children" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <TextArea fx:id="total_amt" maxHeight="-Infinity" editable="false" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="29.0" prefWidth="186.0" promptText="total amount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <TextArea fx:id="total_amt" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="29.0" prefWidth="186.0" promptText="total amount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                             </children>
                         </GridPane>
+                        <Button fx:id="calculate" layoutX="546.0" layoutY="361.0" mnemonicParsing="false" onAction="#calculation" opacity="0.22" prefHeight="31.0" prefWidth="117.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="page3" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <TextArea fx:id="textarea2" editable="false" layoutX="39.0" layoutY="95.0" opacity="0.75" prefHeight="90.0" prefWidth="619.0" promptText="Record Generated" wrapText="true">
+                        <TextArea fx:id="textarea2" editable="false" layoutX="39.0" layoutY="73.0" opacity="0.75" prefHeight="258.0" prefWidth="619.0" promptText="Record Generated" visible="false" wrapText="true">
                             <font>
                                 <Font name="Arial Bold" size="18.0" />
                             </font>
                         </TextArea>
-                        <Button fx:id="finish" layoutX="301.0" onAction="#save" layoutY="220.0" mnemonicParsing="false" disable="true" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Finish" textFill="WHITE">
+                        <Button fx:id="finish" disable="true" layoutX="302.0" layoutY="195.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Finish" textFill="WHITE">
                             <font>
                                 <Font name="Arial Bold" size="16.0" />
                             </font>
@@ -246,6 +253,11 @@
                                 <DropShadow />
                             </effect>
                         </Button>
+                  <Button fx:id="again" disable="true" layoutX="283.0" layoutY="343.0" mnemonicParsing="false" onAction="#again_action" prefHeight="38.0" prefWidth="133.0" style="-fx-background-color: #27df8f;" text="New Booking" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </children>
