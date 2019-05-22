@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Scanner;
 
 
 public class Main extends Application {
@@ -91,6 +92,101 @@ public class Main extends Application {
 
         return dataBlock;
     }
+
+    public String SanD(int id, int mode){
+        int dataBlock = -1;
+        byte[] bytes;
+        int level1=(id /1000)*1000;
+        int indexBlock=0;
+        int pointer=getPointer(indexBlock,level1);
+        System.out.println(level1 +" @ Index Block"+pointer);
+        if (pointer<0)
+        {
+            return "Record is not present";
+        }
+        else{
+            int level2 = (id / 100) * 100;
+            indexBlock = pointer;
+            System.out.println(level2 +" @ Index Block"+pointer);
+            pointer = getPointer(indexBlock, level2);
+            if (pointer < 0)
+            {
+                return "Record is not present";
+            }
+            else {
+                int level3 = (id / 10) * 10;
+                indexBlock = pointer;
+                System.out.println(level3 +" @ Index Block"+pointer);
+                pointer = getPointer(indexBlock, level3);
+                if (pointer < 0) {
+                    return "Record is not present";
+                }
+                else{
+                    dataBlock = pointer;
+                    System.out.println(id +" @ Data Block"+pointer);
+                    switch (mode) {
+                        case 1: {
+                            try (RandomAccessFile file = new RandomAccessFile(data.travelFile, "r")) {
+                                int startPosition = dataBlock * 1210;
+                                int location = id % 10;
+                                int fileposition = startPosition + location * 120 + 10;
+                                file.seek(fileposition);
+                                bytes = new byte[120];
+                                file.read(bytes);
+                                file.close();
+                                String Record = new String(bytes);
+                                Record = Record.trim();
+                                if (Record.length() <= 4) {
+                                    return "Record is not present";
+                                }else{
+                                    System.out.println("Record is present");
+                                    return Record;
+                                }
+                            }catch (IOException e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error Dialog");
+                                alert.setContentText("Ooops, File error!");
+                                alert.showAndWait();
+                            }
+                        }
+
+                        case 2:{
+                            try (RandomAccessFile file = new RandomAccessFile(data.travelFile, "rw")) {
+                                int startPosition = dataBlock * 1210;
+                                int loc = id % 10;
+                                int filepos = startPosition + loc * 120 + 10;
+                                file.seek(filepos);
+                                bytes = new byte[120];
+                                file.read(bytes);
+                                String rep;
+                                String Record = new String(bytes);
+                                Record = Record.trim();
+                                if (Record.length() <= 4) {
+                                    return "Record is not present";
+                                }else{
+                                    System.out.println("Record is present");
+                                        rep = String.format("%-120s",id);
+                                        file.seek(filepos);
+                                        file.write(rep.getBytes());
+                                        file.close();
+                                    return "Record is deleted";
+                                }
+                            }catch (IOException e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error Dialog");
+                                alert.setContentText("Ooops, File error!");
+                                alert.showAndWait();
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        }
+        return "Record is not present";
+    }
+
 
     private int getPointer(int indexBlock, int searchValue)
     {

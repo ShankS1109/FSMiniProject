@@ -55,21 +55,21 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Open  Data File" />
-                        <MenuItem mnemonicParsing="false" text="Open level1 Index File" />
-                        <MenuItem mnemonicParsing="false" text="Open level2 Index File" />
+                        <MenuItem mnemonicParsing="false" onAction="#Close" text="Exit" />
+                        <MenuItem mnemonicParsing="false" onAction="#open1" text="Open Data File " />
+                        <MenuItem mnemonicParsing="false" onAction="#open2" text="Open Index File" />
+                        <MenuItem mnemonicParsing="false" onAction="#again_action" text="Go Back to Main page" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Search" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem fx:id="search" mnemonicParsing="false" onAction="#searchM" text="Search" />
+                        <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteM" text="Delete" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
                     </items>
                 </Menu>
             </menus>
@@ -253,10 +253,35 @@
                                 <DropShadow />
                             </effect>
                         </Button>
-                  <Button fx:id="again" disable="true" layoutX="283.0" layoutY="343.0" mnemonicParsing="false" onAction="#again_action" prefHeight="38.0" prefWidth="133.0" style="-fx-background-color: #27df8f;" text="New Booking" textFill="WHITE" visible="false">
+                  <Button fx:id="again" layoutX="283.0" layoutY="343.0" mnemonicParsing="false" onAction="#again_action" prefHeight="38.0" prefWidth="133.0" style="-fx-background-color: #27df8f;" text="New Booking" textFill="WHITE" visible="false">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+                  <Button fx:id="DelButton" disable="true" layoutX="563.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteMM" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #27df8f;" text="Delete" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+                  <TextField fx:id="tid" layoutX="256.0" layoutY="171.0" promptText="0000 - 9999" visible="false" />
+                  <Label fx:id="serdis" layoutX="157.0" layoutY="135.0" prefHeight="28.0" prefWidth="386.0" text="Enter the Travel ID you want to search...." textAlignment="CENTER" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="SerButton" layoutX="303.0" layoutY="233.0" mnemonicParsing="false" onAction="#searchMM" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #27df8f;" text="Search" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Button>
                     </children>
                 </AnchorPane>
